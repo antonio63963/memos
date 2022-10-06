@@ -64,6 +64,39 @@ export const userReducer = (
         error: { $set: null },
       });
     }
+    // SORT
+    case UserActionTypes.SORT_AGE_ZA: {
+      return {
+        users: state.users.sort((a, b) => b.age - a.age),
+        isLoading: false,
+        error: null,
+        isModal: false,
+      };
+    }
+    case UserActionTypes.SORT_AGE_AZ: {
+      return {
+        users: state.users.sort((a, b) => a.age - b.age),
+        isLoading: false,
+        error: null,
+        isModal: false,
+      };
+    }
+    case UserActionTypes.SORT_NAME_AZ: {
+      return {
+        users: state.users.sort((a, b) => (a.name > b.name ? 1 : -1)),
+        isLoading: false,
+        error: null,
+        isModal: false,
+      };
+    }
+    case UserActionTypes.SORT_NAME_ZA: {
+      return {
+        users: state.users.sort((a, b) => (a.name < b.name ? 1 : -1)),
+        isLoading: false,
+        error: null,
+        isModal: false,
+      };
+    }
     default:
       return state;
   }

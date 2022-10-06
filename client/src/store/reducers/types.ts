@@ -24,6 +24,11 @@ enum UserActionTypes {
   ERROR_MODAL_CLOSE = 'ERROR_MODAL_CLOSE',
   OPEN_MODAL = 'OPEN_MODAL',
   CLOSE_MODAL = 'CLOSE_MODAL',
+
+  SORT_AGE_ZA = 'SORT_AGE_ZA',
+  SORT_AGE_AZ = 'SORT_AGE_AZ',
+  SORT_NAME_ZA = 'SORT_NAME_ZA',
+  SORT_NAME_AZ = 'SORT_NAME_AZ',
 }
 
 type FetchUserAction = {
@@ -49,6 +54,18 @@ type OpenModal = {
 type CloseModal = {
   type: UserActionTypes.CLOSE_MODAL;
 };
+type SortAgeZA = {
+  type: UserActionTypes.SORT_AGE_ZA;
+}
+type SortAgeAZ = {
+  type: UserActionTypes.SORT_AGE_AZ;
+}
+type SorNameZA = {
+  type: UserActionTypes.SORT_NAME_ZA;
+}
+type SorNameAZ = {
+  type: UserActionTypes.SORT_NAME_AZ;
+}
 
 // CREATE
 type FetchCreateUserSuccessAction = {
@@ -76,7 +93,11 @@ type UserAction =
   | OpenModal
   | CloseModal
   | FetchDeleteUserSuccessAction
-  | FetchEditUserSuccessAction;
+  | FetchEditUserSuccessAction
+  | SortAgeZA
+  | SortAgeAZ
+  | SorNameZA
+  | SorNameAZ;
 
 
 export type { User, UserState, UserAction };

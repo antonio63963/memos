@@ -16,6 +16,7 @@ import { Input, Textarea } from "styled/Form";
 import { useDispatch } from "react-redux";
 import { fetchDeleteUser, fetchEditUser } from "store/action_creators/user";
 import Flex from "components/Flex";
+import MoreButton from "components/MoreButton/MoreButton";
 
 const TableRow: FC<TableProps> = function (props) {
   const dispatch = useDispatch();
@@ -37,6 +38,13 @@ const TableRow: FC<TableProps> = function (props) {
       setIsEdit(false);
     }
   }, [dispatch, id, inputAbout, inputAge, inputName]);
+
+  const onClose = useCallback(() => {
+    setInputName(name);
+    setInputAge(age);
+    setInputAbout(aboutPerson);
+    setIsEdit(false);
+  }, [aboutPerson, age, name])
 
   const onDelete = () => {
     fetchDeleteUser(dispatch, id);
@@ -77,23 +85,24 @@ const TableRow: FC<TableProps> = function (props) {
             />
           </Td>
           <Td>
-          <Flex justify="space-evenly">
+            <Flex justify="space-evenly">
+              <MoreButton onClose={onClose}>
+                <Button mb="15px" onClick={onSubmit}>
+                  <FaRegSave />
+                </Button>
+              </MoreButton>
               <Button
+                tablet
                 outlined
                 color="blue"
-                onClick={() => {
-                  setInputName(name);
-                  setInputAge(age);
-                  setInputAbout(aboutPerson);
-                  setIsEdit(false);
-                }}
+                onClick={onClose}
               >
                 <FaRegTimesCircle />
               </Button>
-              <Button onClick={onSubmit}>
+              <Button tablet onClick={onSubmit}>
                 <FaRegSave />
               </Button>
-          </Flex>
+            </Flex>
           </Td>
         </Tr>
       ) : (
@@ -104,10 +113,15 @@ const TableRow: FC<TableProps> = function (props) {
           <Td>{aboutPerson}</Td>
           <Td>
             <Flex justify="space-evenly">
-              
-              <Button mobile primary onClick={() =>{}}>
-              <FaEllipsisV />
-              </Button>
+              <MoreButton>
+                <Button mb="15px" onClick={() => setIsEdit(true)}>
+                  <FaRegEdit />
+                </Button>
+                <Button bg="red" mb="15px" onClick={onDelete}>
+                  <FaRegTrashAlt />
+                </Button>
+              </MoreButton>
+
               <Button tablet primary onClick={() => setIsEdit(true)}>
                 <FaRegEdit />
               </Button>
